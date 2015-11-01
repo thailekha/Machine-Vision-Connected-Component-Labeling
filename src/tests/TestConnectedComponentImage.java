@@ -184,7 +184,7 @@ public class TestConnectedComponentImage {
 			assertEquals(located.y,80);
 			assertEquals(located,new Point(82,80));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			fail("Exception thrown");
 			e.printStackTrace();
 		}
 	}
