@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 import java.awt.Point;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
 import org.junit.After;
 import org.junit.Before;
@@ -54,8 +55,8 @@ public class TestConnectedComponentImage {
 
 			assertEquals(processor.getPicture(), processor2.getPicture());
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Exception thrown");
+			//e.printStackTrace();
+			fail(e.getMessage());
 		}
 	}
 
@@ -74,8 +75,8 @@ public class TestConnectedComponentImage {
 				assertEquals(p, c.getPicture());
 			}
 		} catch (Throwable e) {
-			e.printStackTrace();
-			fail("Exception thrown");
+			//e.printStackTrace();
+			fail(e.getMessage());
 		}
 	}
 
@@ -125,8 +126,8 @@ public class TestConnectedComponentImage {
 				}
 			}			
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Exception thrown");
+			//e.printStackTrace();
+			fail(e.getMessage());
 		}
 	}
 	
@@ -184,8 +185,61 @@ public class TestConnectedComponentImage {
 			assertEquals(located.y,80);
 			assertEquals(located,new Point(82,80));
 		} catch (Exception e) {
-			fail("Exception thrown");
-			e.printStackTrace();
+			fail(e.getMessage());
+			//e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Right B.I.C.E.P: Right
+	 * Test the red box drawn at the identified component
+	 */
+	@Test
+	public void testBoundingBox() {
+		String[] toBound = new String[]{"twoPixelsInMiddle","twoConsecutivePixelsInMiddle"}; 
+		ArrayList<int[]> results = new ArrayList<>();
+		results.add(new int[]{69,54});
+		results.add(new int[]{85,57});
+		results.add(new int[]{81,47});
+		results.add(new int[]{82,47});
+		
+		int count = 0;
+		for(int i = 0; i < toBound.length; i++) {
+			try {
+				System.out.println();
+				ConnectedComponentImage c = new ConnectedComponentImage(pre + toBound[i] + ".bmp",1);
+				Picture drawn = c.identifyComponentImage();
+				int[] a = results.get(count++);
+				int[] b = results.get(count++);
+				assertEquals(drawn.get(a[0], a[1]),Color.red);
+				assertEquals(drawn.get(b[0], b[1]),Color.red);
+			} catch (Exception e) {
+				fail(e.getMessage());
+				e.printStackTrace();
+			}
+		}	
+	}
+	
+	/**
+	 * Right B.I.C.E.P: Right
+	 * Test that red box is not drawn with a blank picture 
+	 * (no component identified)
+	 */
+	@Test
+	public void testBoundingBoxBlank() {
+		try {
+			ConnectedComponentImage c = new ConnectedComponentImage(pre + "blank" + ".bmp",1);
+			assertEquals(c.countComponents(),0);
+			
+			Picture drawn = c.identifyComponentImage();
+			for(int x = 0; x < drawn.width(); x++) {
+				for(int y = 0; y < drawn.height(); y++) {
+					Color color = drawn.get(x, y);
+					assertTrue(! color.equals(Color.red));
+				}
+			}
+		} catch (Exception e) {
+			fail(e.getMessage());
 		}
 	}
 	
