@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="494.0" style="-fx-background-color: #800000;" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LandingController">
+   <children>
+      <Text fill="#ffcd94" layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Component Scanner" wrappingWidth="323.13671875">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Text>
+      <Button fx:id="browse" layoutX="404.0" layoutY="91.0" mnemonicParsing="false" style="-fx-background-color: #ffad40;" stylesheets="@Main.css" text="Browse" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="start" layoutX="404.0" layoutY="131.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #ffad40;" stylesheets="@Main.css" text="Start" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <ChoiceBox fx:id="thresholdMode" layoutX="290.0" layoutY="131.0" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: #ffad40; -fx-font-color: #000000;" />
+      <Button fx:id="originalPic" layoutX="16.0" layoutY="218.0" mnemonicParsing="false" style="-fx-background-color: #ffad40;" stylesheets="@Main.css" text="Original Picture" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="randomColorPic" layoutX="240.0" layoutY="218.0" mnemonicParsing="false" style="-fx-background-color: #ffad40;" stylesheets="@Main.css" text="Random Color" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="binarizedPic" layoutX="124.0" layoutY="218.0" mnemonicParsing="false" style="-fx-background-color: #ffad40;" stylesheets="@Main.css" text="Binarized Picture" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="highlight" layoutX="340.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" style="-fx-background-color: #ffad40;" stylesheets="@Main.css" text="Highlight Components" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <ScrollPane layoutX="16.0" layoutY="253.0" prefHeight="60.0" prefWidth="469.0" style="-fx-background-color: #8000FF;" stylesheets="@Main.css">
+         <content>
+            <Text fx:id="status" fill="#430086" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="463.13671875" />
+         </content>
+      </ScrollPane>
+      <Text fx:id="componentCount" fill="WHITE" layoutX="139.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="82.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="fileLocationText" fill="WHITE" layoutX="29.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="354.13671875">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Text>
+      <Button fx:id="countButton" layoutX="17.0" layoutY="170.0" mnemonicParsing="false" style="-fx-background-color: #ffad40;" stylesheets="@Main.css" text="Count component" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Text fx:id="dimension" fill="WHITE" layoutX="16.0" layoutY="148.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="252.13671875" />
+      <Text fx:id="processingTime" fill="WHITE" layoutX="246.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="213.13671875" />
+   </children>
+</AnchorPane>
