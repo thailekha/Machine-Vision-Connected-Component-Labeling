@@ -20,7 +20,7 @@ public interface UnionFind {
 	 * Chase the root of the component
 	 * @param p
 	 * @param depth initially 1
-	 * @return root of component p
+	 * @return root of component p and the depth
 	 */
 	int[] findRootR(int p, int depth);
 
