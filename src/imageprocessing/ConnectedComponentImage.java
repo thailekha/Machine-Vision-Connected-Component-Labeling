@@ -128,6 +128,7 @@ public class ConnectedComponentImage implements ComponentImage, UnionFind {
 		} finally {
 			service.shutdown(); // shutdown the ExecutorService after executing
 		}
+		readyToUse = true;
 		time = watch.elapsedTime();
 	}
 
@@ -156,8 +157,8 @@ public class ConnectedComponentImage implements ComponentImage, UnionFind {
 		@Override
 		public ConnectedComponentImage call() throws Exception {
 			c.twopassProcess();
-			c.completeDB();
-			readyToUse = true;
+			//c.completeDB();
+			//c.readyToUse = true;
 			return c;
 		}
 	}
@@ -237,24 +238,31 @@ public class ConnectedComponentImage implements ComponentImage, UnionFind {
 					int rootLabel = findRootR(labelOfPixel, 1)[0];
 					labels[y * wid + x] = rootLabel;
 					equi[labelOfPixel] = rootLabel;
+					
+					//Complete the components field
+					if(rootLabel != labelOfPixel) {
+						Component c = components.get(rootLabel);
+						c.merge(components.get(labelOfPixel));
+						components.remove(labelOfPixel);
+					}
 				}
 			}
 		}
 	}
 
-	/**
-	 * Complete the components field using the equivalence table
-	 */
-	private void completeDB() {
-		for (int i = 0; i < equi.length; i++) {
-			int root = equi[i];
-			if (root != 0 && root != i) {
-				Component c = components.get(root);
-				c.merge(components.get(i));
-				components.remove(i);
-			}
-		}
-	}
+//	/**
+//	 * Complete the components field using the equivalence table
+//	 */
+//	private void completeDB() {
+//		for (int i = 0; i < equi.length; i++) {
+//			int root = equi[i];
+//			if (root != 0 && root != i) {
+//				Component c = components.get(root);
+//				c.merge(components.get(i));
+//				components.remove(i);
+//			}
+//		}
+//	}
 
 	/**
 	 * Getter for components
@@ -314,6 +322,7 @@ public class ConnectedComponentImage implements ComponentImage, UnionFind {
 			}
 		}
 
+		//Make sure background is always black 
 		if (mode == 1) {
 			Iterator<Point> backgroundPixels = background.getPixels().iterator();
 			while (backgroundPixels.hasNext()) {
@@ -447,7 +456,8 @@ public class ConnectedComponentImage implements ComponentImage, UnionFind {
 	 * @param p
 	 * @param depth
 	 *            initially 1
-	 * @return root of component p
+	 * @return an array of size 2, 
+	 * including the root of p and the depth
 	 */
 	@Override
 	public int[] findRootR(int p, int depth) {
