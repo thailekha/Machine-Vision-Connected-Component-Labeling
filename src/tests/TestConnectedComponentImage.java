@@ -170,23 +170,15 @@ public class TestConnectedComponentImage {
 	}
 
 	/**
-	 * RIGHT B.I.C.E.P: I
-	 * Binarize a binarized picture results in the original
-	 * (Only for black and white picture) 
+	 * RIGHT B.I.C.E.P: Right
+	 * Binarizing a black and white picture results in the same as the original
 	 */
-	@Test // Inverse
-	public void testInversibleBinarisedPicture() {
+	@Test 
+	public void testBinarizeBlackAndWhitePicture() {
 		for (int i = 0; i < names.length; i++) {
 			try {
-				ConnectedComponentImage a = new ConnectedComponentImage(pre + names[i] + ".bmp", 0);
-				String binarisedLocationA = pre + "results/" + "a.png";
-				a.binaryComponentImage().save(binarisedLocationA);				
-				ConnectedComponentImage b = new ConnectedComponentImage(binarisedLocationA, 0);
-				assertEquals("Error with case " + names[i], a.getPicture(), b.binaryComponentImage());
-
-				//delete the saved file
-				File saved = new File(pre + "results/" + "a.png");
-				saved.delete();
+				ConnectedComponentImage a = new ConnectedComponentImage(pre + names[i] + ".bmp", 1);
+				assertEquals(a.getPicture(),a.binaryComponentImage());
 			} catch (Exception e) {
 				e.printStackTrace();
 				fail("Exception thrown with case name " + names[i]);
