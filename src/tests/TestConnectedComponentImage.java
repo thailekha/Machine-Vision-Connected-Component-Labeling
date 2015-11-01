@@ -141,6 +141,7 @@ public class TestConnectedComponentImage {
 			try {
 				ConnectedComponentImage c = new ConnectedComponentImage(pre + names[i] + ".bmp", 1);
 				assertEquals("Error with case " + names[i], c.countComponents(), results[i]);
+				assertEquals("Error with case " + names[i], c.getComponentsDB().keySet().size(), results[i]);
 			} catch (Exception e) {
 				e.printStackTrace();
 				fail("Exception thrown with case name " + names[i]);
@@ -160,6 +161,7 @@ public class TestConnectedComponentImage {
 			try {
 				ConnectedComponentImage c = new ConnectedComponentImage(pre + names[i] + ".bmp", 0);
 				assertEquals("Error with case " + names[i], c.countComponents(), results[i]);
+				assertEquals("Error with case " + names[i], c.getComponentsDB().keySet().size(), results[i]);
 			} catch (Exception e) {
 				e.printStackTrace();
 				fail("Exception thrown with case name " + names[i]);
@@ -176,10 +178,9 @@ public class TestConnectedComponentImage {
 	public void testInversibleBinarisedPicture() {
 		for (int i = 0; i < names.length; i++) {
 			try {
-				//Mode 1: darker is foreground
 				ConnectedComponentImage a = new ConnectedComponentImage(pre + names[i] + ".bmp", 0);
 				String binarisedLocationA = pre + "results/" + "a.png";
-				a.binaryComponentImage().save(binarisedLocationA);
+				a.binaryComponentImage().save(binarisedLocationA);				
 				ConnectedComponentImage b = new ConnectedComponentImage(binarisedLocationA, 0);
 				assertEquals("Error with case " + names[i], a.getPicture(), b.binaryComponentImage());
 
