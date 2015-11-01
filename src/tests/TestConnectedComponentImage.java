@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 import java.awt.Color;
+import java.awt.Point;
 import java.io.File;
 import java.util.concurrent.TimeoutException;
 import org.junit.After;
@@ -169,6 +170,25 @@ public class TestConnectedComponentImage {
 		}
 	}
 
+	/**
+	 * Right B.I.C.E.P: Right
+	 * Test if the coordinate of a component is located
+	 */
+	@Test
+	public void testLocateComponent() {
+		try {
+			ConnectedComponentImage c = new ConnectedComponentImage(pre + "onePixelInMiddle.bmp",1);
+			assertEquals(1,c.countComponents());
+			Point located = c.getSetComponents().iterator().next().getPixels().iterator().next();
+			assertEquals(located.x,82);
+			assertEquals(located.y,80);
+			assertEquals(located,new Point(82,80));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * RIGHT B.I.C.E.P: Right
 	 * Binarizing a black and white picture results in the same as the original
