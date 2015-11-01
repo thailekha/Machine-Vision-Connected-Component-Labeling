@@ -62,6 +62,7 @@ public class LandingController {
 				File chosenFile = fileChooser.showOpenDialog(new Stage());
 				if (chosenFile != null) {
 					if (!inRun) {
+						dimension.setText("");
 						thresholdMode.setDisable(false);
 						start.setDisable(false);
 						status.setText("Choose mode and press start");
